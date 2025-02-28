@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agathiya - Celebrity Management</title>
+  <!-- Google Fonts: Cinzel for titles and Montserrat for body text -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Internal CSS -->
+  <style>
+    /* ------------------------------------
+       Global Reset & Base Styles
+    ------------------------------------ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      width: 90%;
+      margin: auto;
+      max-width: 1200px;
+    }
+    
+    /* ------------------------------------
+       Header & Navigation
+    ------------------------------------ */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 20px 0;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {
+      font-size: 2em;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #f39c12;
+    }
+    
+    /* ------------------------------------
+       Hero Section
+    ------------------------------------ */
+    .hero {
+      background: url('https://source.unsplash.com/1600x900/?celebrity,red-carpet') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* Overlay to darken the background for better text contrast */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      z-index: 1;
+    }
+    .hero-content h1 {
+      font-size: 4em;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .hero-content p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      background: #f39c12;
+      color: #fff;
+      padding: 12px 30px;
+      font-size: 1em;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #d35400;
+    }
+    
+    /* ------------------------------------
+       Section Styles
+    ------------------------------------ */
+    section {
+      padding: 80px 0;
+    }
+    section h2 {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      color: #333;
+    }
+    
+    /* About Section */
+    .about .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .about .content .text,
+    .services .content .text,
+    .contact .content .form {
+      flex: 1;
+      padding: 20px;
+    }
+    .about .content .image,
+    .services .content .image,
+    .portfolio .grid,
+    .contact .content .image {
+      flex: 1;
+      padding: 20px;
+    }
+    .about .content .image img,
+    .services .content .image img,
+    .contact .content .image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    
+    /* ------------------------------------
+       Services Section
+    ------------------------------------ */
+    .services .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-around;
+      margin-top: 40px;
+    }
+    .services .card {
+      background: #f5f5f5;
+      padding: 30px;
+      flex: 1;
+      min-width: 250px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .services .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    }
+    .services .card i {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #f39c12;
+    }
+    .services .card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+    .services .card p {
+      font-size: 1em;
+      color: #666;
+    }
+    
+    /* ------------------------------------
+       Portfolio Section
+    ------------------------------------ */
+    .portfolio .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .portfolio .grid-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .portfolio .grid-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .portfolio .grid-item:hover img {
+      transform: scale(1.1);
+    }
+    .portfolio .grid-item .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .portfolio .grid-item:hover .overlay {
+      opacity: 1;
+    }
+    .portfolio .grid-item .overlay h4 {
+      color: #fff;
+      font-size: 1.5em;
+      font-family: 'Cinzel', serif;
+    }
+    
+    /* ------------------------------------
+       Contact Section
+    ------------------------------------ */
+    .contact .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .contact .content .form {
+      background: #f5f5f5;
+      padding: 40px;
+      border-radius: 10px;
+      flex: 1;
+      padding: 20px;
+    }
+    .contact .content .form h2 {
+      margin-bottom: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 2em;
+    }
+    .contact .content .form input,
+    .contact .content .form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .contact .content .form button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #f39c12;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact .content .form button:hover {
+      background: #d35400;
+    }
+    
+    /* ------------------------------------
+       Footer
+    ------------------------------------ */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.9em;
+    }
+    
+    /* ------------------------------------
+       Responsive Adjustments
+    ------------------------------------ */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+      }
+      .about .content,
+      .services .content,
+      .portfolio .content,
+      .contact .content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Agathiya</div>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Agathiya</h1>
+      <p>Where Celebrity Dreams and Excellence Meet</p>
+      <a href="#about" class="btn">Discover More</a>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="content">
+        <div class="text">
+          <h2>About Agathiya</h2>
+          <p>Agathiya is a premier celebrity management agency that connects talent with opportunity. Our dedicated team works tirelessly to nurture and guide careers to the pinnacle of success. With a legacy of excellence and a network of industry leaders, Agathiya ensures that every star shines the brightest.</p>
+        </div>
+        <div class="image">
+          <img src="https://source.unsplash.com/600x400/?celebrity,glamour" alt="Celebrity Glamour">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="content">
+        <div class="text">
+          <h2>Our Services</h2>
+          <p>We offer comprehensive management solutions tailored for celebrities and public figures. From career planning to brand management, our services are designed to amplify your presence and achieve unparalleled success.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <i class="fas fa-briefcase"></i>
+          <h3>Career Management</h3>
+          <p>Personalized career strategies and growth plans for lasting impact.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-bullhorn"></i>
+          <h3>Brand Development</h3>
+          <p>Build and enhance your personal brand with our expert guidance.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-globe"></i>
+          <h3>Global Networking</h3>
+          <p>Connect with industry leaders and expand your influence worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Portfolio Section -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2>Our Celebrities</h2>
+      <div class="grid">
+        <div class="grid-item">
+          <img src="https://source.unsplash.com/400x400/?celebrity,actor" alt="Celebrity 1">
+          <div class="overlay">
+            <h4>Celebrity One</h4>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="https://source.unsplash.com/400x400/?celebrity,singer" alt="Celebrity 2">
+          <div class="overlay">
+            <h4>Celebrity Two</h4>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="https://source.unsplash.com/400x400/?celebrity,model" alt="Celebrity 3">
+          <div class="overlay">
+            <h4>Celebrity Three</h4>
+          </div>
+        </div>
+        <div class="grid-item">
+          <img src="https://source.unsplash.com/400x400/?celebrity,dancer" alt="Celebrity 4">
+          <div class="overlay">
+            <h4>Celebrity Four</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="content">
+        <div class="form">
+          <h2>Contact Us</h2>
+          <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+        <div class="image">
+          <img src="https://source.unsplash.com/600x400/?celebrity,meeting" alt="Contact Image">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Agathiya. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Font Awesome Script for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
