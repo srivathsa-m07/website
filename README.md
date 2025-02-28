@@ -46,9 +46,9 @@ Agathiya-Repository/ │── index.html # Main homepage │── about.html #
 
 ## 📞 Contact & Support
 
-📍 **Developed By:** [Your Name]  
-📧 **Email:** [Your Email]  
-🌐 **Website:** [Your Website (if any)]  
+📍 **Developed By:** Srivathsa M 
+📧 **Email:** srivathsam07@gmail.com 
+
 
 💡 *Feel free to contribute or suggest improvements!*  
 
